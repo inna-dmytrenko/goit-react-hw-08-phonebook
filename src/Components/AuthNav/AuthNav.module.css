@@ -1,0 +1,22 @@
+.authNav {
+  /* display: grid;
+  text-align: start; */
+  /* text-align: center; */
+  /* grid-template-columns: 5fr 1fr 1fr 1fr; */
+}
+
+.link {
+  /* display: grid; */
+  /* text-align: center; */
+  /* grid-template-columns: 5fr 1fr 1fr 1fr; */
+  text-decoration: none;
+  padding: 24px;
+  font-weight: 700;
+  color: #03252e;
+  font-size: 24px;
+}
+
+.activeLink {
+  composes: link;
+  color: #19c719;
+}
