@@ -7,6 +7,8 @@ import Container from "./Components/Container/Container";
 import FormRegister from "./views/FormRegister";
 import FormLogin from "./views/FormLogin";
 import HomeView from "./views/HomeView";
+// import PhoneBook from './Components/PhoneBook/PhoneBook'
+import PhoneBookList from "./Components/PhoneBookList/PhoneBookList";
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
           <FormLogin />
         </Route>
         <Route path="/contacts">
-          <h2>Contacts</h2>
+          <PhoneBookList />
         </Route>
         <Route>
           <h2>Not found</h2>

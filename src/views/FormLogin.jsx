@@ -1,50 +1,31 @@
-// import 'react-toastify/dist/ReactToastify.css'
-// import { toast, ToastContainer } from 'react-toastify'
-// import { useState } from 'react'
-// import './PhoneBookForm.styled.js'
-// import { Form, Input, Label, Button, App } from './PhoneBookForm.styled'
-// import {
-//   useGetContactsQuery,
-//   useAddContactMutation,
-// } from '../../redux/phoneBook-api'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { authOperations } from '../redux/auth'
+
 export default function FormLogin() {
-  //   const formInitialState = {
-  //     name: '',
-  //     number: '',
-  //     email: '',
-  //   }
-  //   const { data } = useGetContactsQuery()
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'email':
+        return setEmail(value)
+      case 'password':
+        return setPassword(value)
+      default:
+        return
+    }
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(authOperations.logIn({ email, password }))
+    setEmail('')
+    setPassword('')
+  }
 
-  //   const [addContact] = useAddContactMutation()
-
-  //   const [form, setForm] = useState(formInitialState)
-
-  //   const inputHandler = (e) => {
-  //     const name = e.target.name
-
-  //     const value = e.target.value
-  //     setForm({ ...form, [name]: value })
-  //   }
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault()
-  //     if (
-  //       data.some((el) => el.name === name) ||
-  //       data.some((el) => el.number === number) ||
-  //       data.some((el) => el.email === email)
-  //     ) {
-  //       setForm(formInitialState)
-  //       return toast(`${name} is already in contacts`)
-  //     }
-  //     addContact({ name, number, email })
-
-  //     setForm(formInitialState)
-  //   }
-  //   const { name, number, email } = form
   return (
     <div>
-      <form
-      //   onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div>
           <div>
             <label htmlFor="">Email</label>
@@ -52,20 +33,20 @@ export default function FormLogin() {
               placeholder="bluebill1049@hotmail.com"
               type="email"
               name="email"
-              // value={email}
-              // onChange={inputHandler}
+              value={email}
+              onChange={handleChange}
             />
           </div>
           <label htmlFor="">Password</label>
           <input
             required
             placeholder="Search password"
-            type="text"
+            type="password"
             name="password"
-            // value={name}
+            value={password}
             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
             title="Пароль должен состоять минимум из восьми символов, по крайней мере одна буква и одно число"
-            // onChange={inputHandler}
+            onChange={handleChange}
           />
         </div>
         <button type="submit">Log in</button>

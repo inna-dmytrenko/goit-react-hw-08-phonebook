@@ -17,6 +17,7 @@ export default function Navigation() {
       >
         Sign Up
       </NavLink>
+      
       {/* <NavLink
         className={styles.link}
         activeClassName={styles.activeLink}

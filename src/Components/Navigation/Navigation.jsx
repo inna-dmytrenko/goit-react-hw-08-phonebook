@@ -11,6 +11,14 @@ export default function Navigation() {
       >
         Phonebook
       </NavLink>
+      <NavLink
+        exact
+        className={styles.link}
+        activeClassName={styles.activeLink}
+        to="/contacts"
+      >
+        Contacts
+      </NavLink>
     </nav>
   )
 }
