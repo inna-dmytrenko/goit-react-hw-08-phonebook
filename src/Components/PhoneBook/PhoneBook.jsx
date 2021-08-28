@@ -1,16 +1,17 @@
 import { BsTrashFill } from 'react-icons/bs'
+import { useDispatch } from 'react-redux'
 // import { Frame } from './PhoneBook.styled'
-// import { useDeleteContactMutation } from '../../redux/phoneBook-api'
+import { deleteContacts } from '../../redux/contacts/contacts-operations'
 
 const PhoneBook = ({ name, number, email, id }) => {
   //   const [deleteContact] = useDeleteContactMutation()
-
+const dispatch= useDispatch()
   return (
     <div>
       <p>{name}</p>
       <p>{number}</p>
       <p>{email}</p>
-      <span onClick={() => console.log('deleteContact(id)')}>
+      <span onClick={() => dispatch(deleteContacts(id))}>
         <BsTrashFill />
       </span>
     </div>

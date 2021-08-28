@@ -1,41 +1,48 @@
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from 'react-toastify'
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import contactsOperations from '../../redux/contacts/contacts-operations'
-import { connect } from 'react-redux'
-// import './PhoneBookForm.styled.js'
-// import { Form, Input, Label, Button, App } from './PhoneBookForm.styled'
-// import {
-//   useGetContactsQuery,
-//   useAddContactMutation,
-// } from '../../redux/phoneBook-api'
+import {addContacts} from '../../redux/contacts/contacts-operations'
+
+
 function PhoneBookEditor() {
-  const formInitialState = {
-    name: '',
-    number: '',
-    email: '',
+
+  const  dispatch = useDispatch()
+
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const resetForm = () => {
+    setName('');
+    setNumber('');
+    setEmail('')
   }
-  // const { data } = useGetContactsQuery()
+  const handleChange = ({ target: { name, value } }) => {
 
-  // const [addContact] = useAddContactMutation()
-
-  const [form, setForm] = useState(formInitialState)
-
-  const handleChange = (e) => {
-    const name = e.target.name
-
-    const value = e.target.value
-    setForm({ ...form, [name]: value })
-    console.log('handleChange')
+     
+    switch (name) {
+      case 'name':
+        return setName(value)
+      case 'number':
+        return setNumber(value)
+      case 'email':
+        return setEmail(value)
+      default:
+        return
+    }
   }
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    setForm(formInitialState)
-    console.log('handleSubmit')
+    dispatch(addContacts({ name, number, email }));
+    resetForm();
+    // setForm(formInitialState)
+    console.log({name, number, email})
   }
 
-  const { name, number, email } = form
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -77,13 +84,14 @@ function PhoneBookEditor() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Add contact</button>
+        <button type="submit" >
+          Сохранить
+        </button>
+        {/* <button type="submit">Add contact</button> */}
       </form>
       <ToastContainer />
     </div>
   )
 }
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (text) => dispatch(contactsOperations.addContact(text)),
-})
-export default connect(null, mapDispatchToProps)(PhoneBookEditor)
+
+export default PhoneBookEditor

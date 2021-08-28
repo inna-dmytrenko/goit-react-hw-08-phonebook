@@ -1,38 +1,41 @@
-// import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 // import Spinner from '../Loader/Loader'
 import PhoneBookEditor from '../PhoneBookEditor/PhoneBookEditor'
-// import PhoneBook from '../PhoneBook/PhoneBook'
-// import PhoneBookFilter from '../PhoneBookFilter/PhoneBookFilter'
-// import filterContacts from '../../helpers/FilterContacts'
+import PhoneBook from '../PhoneBook/PhoneBook'
+import PhoneBookFilter from '../PhoneBookFilter/PhoneBookFilter'
+import {filterContacts} from '../../helpers/FilterContacts'
 // import { Container, Title } from './PhoneBookList.styled'
 // import { useGetContactsQuery } from '../../redux/phoneBook-api'
 // import { getFilter } from '../../redux/contacts-selector'
 
+import { fetchContacts } from '../../redux/contacts/contacts-operations.js';
+import contactsSelectors from '../../redux/contacts/contacts-selectors'
 const PhoneBookList = () => {
-//   const filter = useSelector(getFilter)
+  const filter = useSelector(contactsSelectors.getFilter)
+console.log(filter)
 
-//   const { data, error, isFetching } = useGetContactsQuery()
-
+  const dispatch = useDispatch()
+  const data = useSelector(contactsSelectors.getContacts)
+  console.log(data)
+ 
+  useEffect(() => { dispatch(fetchContacts()) },[dispatch])
   return (
     <div>
       <PhoneBookEditor />
       <title>CONTACTS</title>
-      {/* {data && <PhoneBookFilter />} */}
+      {data && <PhoneBookFilter />}
       <ul>
-        {/* {error ? (
-          <>Oh no, there was an error</>
-        ) : isFetching ? (
-        //   <Spinner />
-        ) : data ? (
+        { data ? (
           filterContacts(data, filter).map((contact) => (
             <li key={contact.id}>
-              <PhoneBook {...contact} />
+              <PhoneBook {...contact}/>
             </li>
           ))
-        ) : ( */}
+        ) : (
         <li>No contacts</li>
-        {/* )} */}
+        )} 
       </ul>
     </div>
   )

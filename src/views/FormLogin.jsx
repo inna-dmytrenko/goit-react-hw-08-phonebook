@@ -4,8 +4,8 @@ import { authOperations } from '../redux/auth'
 
 export default function FormLogin() {
   const dispatch = useDispatch()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('inna@i.ua')
+  const [password, setPassword] = useState('qwerty1Q')
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'email':
