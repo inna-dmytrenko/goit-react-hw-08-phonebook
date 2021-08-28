@@ -12,22 +12,23 @@ function PhoneBookEditor() {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [email, setEmail] = useState('');
+ 
   const resetForm = () => {
     setName('');
     setNumber('');
-    setEmail('')
+  
   }
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = (e) => {
+// console.log({ target: { name, value } })
+      const name = e.target.name
 
-     
+    const value = e.target.value
     switch (name) {
       case 'name':
         return setName(value)
       case 'number':
         return setNumber(value)
-      case 'email':
-        return setEmail(value)
+     
       default:
         return
     }
@@ -38,16 +39,17 @@ function PhoneBookEditor() {
     e.preventDefault()
 if (
       data.some((el) => el.name === name) ||
-      data.some((el) => el.number === number) ||
-      data.some((el) => el.email === email)
+  data.some((el) => el.number === number)
+
     ) {
       resetForm();
       return toast(`${name} is already in contacts`)
     }
-    dispatch(addContacts({ name, number, email }));
+    dispatch(addContacts({ name, number }));
+    // console.log(dispatch(addContacts({ name, number, email })))
     resetForm();
     // setForm(formInitialState)
-    console.log({name, number, email})
+   
   }
 
   
@@ -82,17 +84,7 @@ if (
           />
         </div>
 
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            placeholder="bluebill1049@hotmail.com"
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" >
+              <button type="submit" >
           Add contact
         </button>
         {/* <button type="submit">Add contact</button> */}

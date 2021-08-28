@@ -1,5 +1,5 @@
 import { Switch } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AppBar } from './Components/AppBar/AppBar';
@@ -25,26 +25,28 @@ function App() {
     <Container>
       <AppBar />
       <Switch>
-        <PublicRoute path="/" exact component={HomeView} />
-        <PrivateRoute
-          path="/contacts"
-          redirectTo="/login"
-          component={PhoneBookList}
-        />
-        <PublicRoute
-          restricted
-          path="/login"
-          redirectTo="/contacts"
-          component={FormLogin}
-        />
-        <PublicRoute
-          redirectTo="/contacts"
-          restricted
-          path="/register"
-          exact
-          component={FormRegister}
-        />
-        <PublicRoute component={NotFount} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <PublicRoute path="/" exact component={HomeView} />
+          <PrivateRoute
+            path="/contacts"
+            redirectTo="/login"
+            component={PhoneBookList}
+          />
+          <PublicRoute
+            restricted
+            path="/login"
+            redirectTo="/contacts"
+            component={FormLogin}
+          />
+          <PublicRoute
+            redirectTo="/contacts"
+            restricted
+            path="/register"
+            exact
+            component={FormRegister}
+          />
+          {/* <PrivateRoute redirectTo="/login" component={NotFount} /> */}
+        </Suspense>
       </Switch>
     </Container>
   );
