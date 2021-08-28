@@ -18,13 +18,7 @@ export default function Navigation() {
         Sign Up
       </NavLink>
       
-      {/* <NavLink
-        className={styles.link}
-        activeClassName={styles.activeLink}
-        to="/contacts"
-      >
-        Contacts
-      </NavLink> */}
+     
     </div>
   )
 }

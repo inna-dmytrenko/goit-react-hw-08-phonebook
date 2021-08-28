@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 
 // import Spinner from '../Loader/Loader'
@@ -6,10 +6,6 @@ import PhoneBookEditor from '../PhoneBookEditor/PhoneBookEditor'
 import PhoneBook from '../PhoneBook/PhoneBook'
 import PhoneBookFilter from '../PhoneBookFilter/PhoneBookFilter'
 import {filterContacts} from '../../helpers/FilterContacts'
-// import { Container, Title } from './PhoneBookList.styled'
-// import { useGetContactsQuery } from '../../redux/phoneBook-api'
-// import { getFilter } from '../../redux/contacts-selector'
-
 import { fetchContacts } from '../../redux/contacts/contacts-operations.js';
 import contactsSelectors from '../../redux/contacts/contacts-selectors'
 const PhoneBookList = () => {

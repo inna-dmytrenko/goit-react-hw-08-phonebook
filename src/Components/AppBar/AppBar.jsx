@@ -5,7 +5,10 @@ import AuthNav from '../AuthNav/AuthNav'
 import UserMenu from '../UserMenu/UserMenu'
 import { authSelectors } from '../../redux/auth'
 
+
+
 export const AppBar = () => {
+  
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn)
 
   return (

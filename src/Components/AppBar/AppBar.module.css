@@ -2,9 +2,9 @@
   /* display: flex;
   justify-content: space-between; */
   display: grid;
-  text-align: start;
+  text-align: end;
   /* text-align: center; */
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   min-height: 80px;
   margin-bottom: 16px;

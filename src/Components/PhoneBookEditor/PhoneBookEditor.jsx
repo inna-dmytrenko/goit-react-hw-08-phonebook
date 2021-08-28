@@ -1,13 +1,14 @@
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from 'react-toastify'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import {addContacts} from '../../redux/contacts/contacts-operations'
-
+import contactsSelectors from '../../redux/contacts/contacts-selectors'
 
 function PhoneBookEditor() {
 
-  const  dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const data = useSelector(contactsSelectors.getContacts)
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -35,7 +36,14 @@ function PhoneBookEditor() {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-
+if (
+      data.some((el) => el.name === name) ||
+      data.some((el) => el.number === number) ||
+      data.some((el) => el.email === email)
+    ) {
+      resetForm();
+      return toast(`${name} is already in contacts`)
+    }
     dispatch(addContacts({ name, number, email }));
     resetForm();
     // setForm(formInitialState)
@@ -85,7 +93,7 @@ function PhoneBookEditor() {
           />
         </div>
         <button type="submit" >
-          Сохранить
+          Add contact
         </button>
         {/* <button type="submit">Add contact</button> */}
       </form>
