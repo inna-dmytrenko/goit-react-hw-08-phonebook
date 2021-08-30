@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import styles from './PhoneBookList.module.css'
 
 // import Spinner from '../Loader/Loader'
 import PhoneBookEditor from '../PhoneBookEditor/PhoneBookEditor'
@@ -18,12 +22,16 @@ console.log(filter)
  
   useEffect(() => { dispatch(fetchContacts()) },[dispatch])
   return (
-    <div>
+    <div  className={styles.grid}>
+
+    <Grid item xs={12} sm={4} className={styles.grid}>
+    <Box bgcolor="success.main" color="success.contrastText" p={2}  >
       <PhoneBookEditor />
-      <title>CONTACTS</title>
-      {data && <PhoneBookFilter />}
+          <title>CONTACTS</title>
+          
+    {data.length > 0 && <PhoneBookFilter />}
       <ul>
-        { data ? (
+        { data.length > 0 ? (
           filterContacts(data, filter).map((contact) => (
             <li key={contact.id}>
               <PhoneBook {...contact}/>
@@ -32,7 +40,10 @@ console.log(filter)
         ) : (
         <li>No contacts</li>
         )} 
-      </ul>
+          </ul>
+            
+      </Box>
+      </Grid>
     </div>
   )
 }

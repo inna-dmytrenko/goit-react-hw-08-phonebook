@@ -1,14 +1,13 @@
 .nav {
   display: grid;
   text-align: start;
-  /* text-align: center; */
+
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 .link {
-  /* display: grid; */
-  /* text-align: center; */
-  /* grid-template-columns: 5fr 1fr 1fr 1fr; */
+  text-align: center;
+
   text-decoration: none;
   padding: 5px;
   font-weight: 700;
@@ -18,5 +17,5 @@
 
 .activeLink {
   composes: link;
-  color: #19c719;
+  color: #4caf50;
 }
